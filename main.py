@@ -1,29 +1,26 @@
-import tkinter as tk
+import pygame
 
-#Creation of a window
-window = tk.Tk()
+pygame.init()
 
-#Window title
-window.title("Algorithm Visualizer")
-window.config(bg  = "#000000")
+(width, height) = (1280,720)
+bg_color = (255,255,255)
 
-#Default window size
-window.geometry("1366x768")
-window.resizable(width = False, height = False)
+screen = pygame.display.set_mode((width,height))
+pygame.display.set_caption("Algorithm visualizer")
+screen.fill(bg_color)
 
-#Main frames : Menu and values to sort.
-menu = tk.Frame(window, bg = "white", width = 341, height = 768)
-visualizer = tk.Frame(window,bg = "grey", width = 1025, height = 768)
-
-#List of differents algorithms
+rect = pygame.Rect(40,350,10,100)
+rect2 = pygame.Rect(52,350,10,100)
+pygame.draw.rect(screen, (0,0,0),rect)
+pygame.draw.rect(screen, (0,0,0),rect2)
 
 
-#Bars in the visualizer
+pygame.display.flip()
 
-
-#Pack the elements
-visualizer.pack(side = "right")
-menu.pack(side = "left")
-
-#Display the window
-window.mainloop()
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+            pygame.quit()
+    
