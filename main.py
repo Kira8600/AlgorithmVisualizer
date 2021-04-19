@@ -1,4 +1,5 @@
 import pygame
+import random
 
 pygame.init()
 
@@ -9,11 +10,23 @@ screen = pygame.display.set_mode((width,height))
 pygame.display.set_caption("Algorithm visualizer")
 screen.fill(bg_color)
 
-rect = pygame.Rect(40,350,10,100)
-rect2 = pygame.Rect(52,350,10,100)
-pygame.draw.rect(screen, (0,0,0),rect)
-pygame.draw.rect(screen, (0,0,0),rect2)
+class bar:
+    def __init__(self,value,x):
+        self.val = value
+        self.pos = x
 
+    def draw(self):
+        pygame.draw.rect(screen, (0,0,0), pygame.Rect(self.pos,400,10,self.val))
+
+    #def move(self):
+
+values = []
+pos = 40
+for i in range(100):
+    values.append(random.randint(10,500))
+    b = bar(values[i], pos)
+    b.draw()
+    pos += 12
 
 pygame.display.flip()
 
