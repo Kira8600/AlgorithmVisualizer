@@ -16,17 +16,19 @@ class bar:
         self.pos = x
 
     def draw(self):
-        pygame.draw.rect(screen, (0,0,0), pygame.Rect(self.pos,400,10,self.val))
+        pygame.draw.line(screen, (0,0,0), (self.pos,700), (self.pos,self.val), 10)
 
     #def move(self):
+
 
 values = []
 pos = 40
 for i in range(100):
-    values.append(random.randint(10,500))
+    values.append(random.randint(1,300))
     b = bar(values[i], pos)
     b.draw()
     pos += 12
+
 
 pygame.display.flip()
 
