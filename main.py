@@ -9,7 +9,7 @@ screen = pygame.display.set_mode((width,height))
 pygame.display.set_caption("Algorithm visualizer")
 screen.fill(bg_color)
 
-class bar:
+class Bar:
     def __init__(self,value,x):
         self.val = value
         self.pos = x
@@ -27,29 +27,29 @@ def bar_switch(b1,b2):
     b1.move(p2)
     b2.move(p1)
 
-tab = []
+bars = []
 position = 40
 for i in range(100):
-    b = bar(random.randint(1,500),position)
-    tab.append(b)
-    tab[i].draw()
+    b = Bar(random.randint(1,500),position)
+    bars.append(b)
+    bars[i].draw()
     position += 12
 
 def rand():
-    tab = []
+    rand_tab = []
     position = 40
     for i in range(100):
-        b = bar(random.randint(1,500),position)
-        tab.append(b)
-        tab[i].draw()
+        b = Bar(random.randint(1,500),position)
+        rand_tab.append(b)
+        rand_tab[i].draw()
         position += 12
 
-def bubble(t):
-    for i in range(len(t)):
-        for n in range(len(t)-1-i):
-            if t[n].val > t[n+1].val:
-                bar_switch(t[n],t[n+1])
-    return t
+def bubble(tab):
+    for i in range(len(tab)):
+        for n in range(len(tab)-1-i):
+            if tab[n].val > tab[n+1].val:
+                bar_switch(t[n],tab[n+1])
+    return tab
 
 running = True
 while running:
@@ -61,7 +61,7 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w:
                 screen.fill(bg_color)
-                bubble(tab)
+                bubble(bars)
             elif event.key == pygame.K_x:
                 screen.fill(bg_color)
                 rand()
