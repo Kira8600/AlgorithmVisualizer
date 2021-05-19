@@ -2,7 +2,6 @@ import algorithms
 import pygame
 import random
 pygame.init()
-#test
 
 (width, height) = (1280,720)
 bg_color = (0,0,0)
