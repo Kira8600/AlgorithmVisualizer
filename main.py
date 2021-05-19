@@ -1,3 +1,4 @@
+import algorithms
 import pygame
 import random
 pygame.init()
