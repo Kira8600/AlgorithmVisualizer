@@ -116,3 +116,34 @@ def countingSortByDigit(array, radix, exponent, minValue):
     return output
 
 ### --- ###
+def tamiser(tab, n, i):
+    plus_long = i
+    l = 2 * i + 1
+    r = 2 * i + 2
+    if l < n and tab[i] < tab[l]:
+          plus_long = l
+  
+    if r < n and tab[plus_long] < tab[r]:
+          plus_long = r
+
+    if plus_long != i:
+        tab[i], tab[plus_long] = tab[plus_long], tab[i]
+        tamiser(tab, n, plus_long)
+
+def tri_heap(tab):
+    n = len(tab)
+    for i in range(n//2, -1, -1):
+        tamiser(tab, n, i)
+  
+    for i in range(n-1, 0, -1):
+        tab[i], tab[0] = tab[0], tab[i]
+        tamiser(tab, i, 0)
+  
+  
+tab = [6, 900, 7, 632, 666]
+tri_heap(tab)
+n = len(tab)
+print("Le tableau trié est")
+for i in range(n):
+    print("%d " % tab[i], end='')
+### --- ###
