@@ -48,7 +48,7 @@ def bubble(tab):
     for i in range(len(tab)):
         for n in range(len(tab)-1-i):
             if tab[n].val > tab[n+1].val:
-                bar_switch(t[n],tab[n+1])
+                bar_switch(tab[n],tab[n+1])
     return tab
 
 running = True
