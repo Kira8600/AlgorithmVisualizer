@@ -2,7 +2,7 @@ import algorithms
 import pygame
 import random
 pygame.init()
-# Bonjour Maxime
+# Je fais de l'info
 
 (width, height) = (1280,720)
 bg_color = (0,0,0)
