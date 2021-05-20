@@ -1,10 +1,6 @@
 import pygame
 import random
-<<<<<<< HEAD
-=======
 pygame.init()
-# Bonjour Maxime
->>>>>>> d6372c901abf71efb8104d97dfa21b52cb1a16fa
 
 #Pygame initialization
 pygame.init()
@@ -15,7 +11,7 @@ pygame.display.set_caption("Algorithm visualizer")
 screen.fill(bg_color)
 
 #The bars
-class bar:
+class Bar:
     def __init__(self,value,x):
         self.val = value
         self.pos = x
@@ -42,7 +38,7 @@ def rand():
     screen.fill(bg_color)
     position = 40
     for i in range(100):
-        b = bar(random.randint(1,500),position)
+        b = Bar(random.randint(1,500),position)
         tab.append(b)
         position += 12
     for i in range(len(tab)):
