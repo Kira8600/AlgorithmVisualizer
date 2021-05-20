@@ -23,7 +23,20 @@ class Bar:
     def move(self,dest):
         self.pos = dest
         self.draw()
+
+class Window:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+        self.surface = pygame.display.set_mode((self.width, self.height))
+        self.tableau = []
     
+    def refresh(self):
+        self.surface.fill(0,0,0)
+        for bar in self.tableau:
+            bar.draw()
+
+
 #To switch bars
 def bar_switch(b1,b2):
     p1 = b1.pos
