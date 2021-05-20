@@ -147,3 +147,15 @@ print("Le tableau trié est")
 for i in range(n):
     print("%d " % tab[i], end='')
 ### --- ###
+espacements = [701, 301, 132, 57, 23, 10, 4, 1]
+def Shell(tab):
+    n = len(tab)  
+    for e in espacements:
+        for i in range(e, n):
+            temp = tab[i]
+            j = i
+            while j >= e and a[j - e] > temp:
+                tab[j] = tab[j - e]
+                j -= e
+            tab[j] = temp
+    return(tab)
