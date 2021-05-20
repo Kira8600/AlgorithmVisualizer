@@ -1,15 +1,12 @@
 ### test pour le code graphique ###
 import pygame
 import algorithms
-from radom import randint
+from random import randint
 pygame.init()
 
 screen = pygame.display.set_mode((720,1080))
-color = {'white': (255, 255, 255),
-        'red': (255, 0, 0)
-        'blue': (0, 255, 0)
-        'green': (0, 0, 255)
-        'black': (0, 0, 0)}
+pygame.display.set_caption('Algorithm Visualiser')
+color = {'white': (255, 255, 255), 'red': (255, 0, 0), 'blue': (0, 255, 0), 'green': (0, 0, 255), 'black': (0, 0, 0)}
 
 class Stick:
     def __init__(self, value, pos):
