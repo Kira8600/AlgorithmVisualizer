@@ -10,6 +10,7 @@ screen = pygame.display.set_mode((width,height))
 pygame.display.set_caption("Algorithm visualizer")
 screen.fill(bg_color)
 
+
 #The bars
 class Bar:
     def __init__(self,value,x):
@@ -24,6 +25,8 @@ class Bar:
         self.pos = dest
         self.draw()
 
+
+#The screen
 class Window:
     def __init__(self, width, height):
         self.width = width
@@ -35,6 +38,7 @@ class Window:
         self.surface.fill(0,0,0)
         for bar in self.tableau:
             bar.draw()
+        pygame.display.flip()
 
 
 #To switch bars
@@ -45,7 +49,6 @@ def bar_switch(b1,b2):
     b2.move(p1)
 
 # Tableau contenant les barres
-
 def rand():
     tab = []
     screen.fill(bg_color)
