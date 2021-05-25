@@ -1,67 +1,54 @@
+#Importatin des bibliothèques
 import pygame
 import random
+
+#Initialisation de PyGame
 pygame.init()
 
-#Pygame initialization
-pygame.init()
-(width, height) = (1280,720)
-bg_color = (0,0,0)
-screen = pygame.display.set_mode((width,height))
-pygame.display.set_caption("Algorithm visualizer")
-screen.fill(bg_color)
-
-
-#The bars
+#Classe barre
 class Bar:
-    def __init__(self,value,x):
-        self.val = value
+    def __init__(self,value,x,surface):
         self.pos = x
+        self.val = value
+        self.surface = surface
         self.color = (255,255,255)
 
     def draw(self):
-        pygame.draw.line(screen, self.color, (self.pos,700), (self.pos,700-self.val), 10)
+        #Dessine une barre
+        pygame.draw.line(self.surface, self.color, (self.pos,700), (self.pos,700-self.val), 10)
 
-    def move(self,dest):
-        self.pos = dest
-        self.draw()
-
-
-#The screen
 class Window:
-    def __init__(self, width, height):
+    def __init__(self, width, height, bg_color, caption):
+        self.tableau = []
+        self.bg = bg_color
         self.width = width
         self.height = height
+        self.caption = caption
         self.surface = pygame.display.set_mode((self.width, self.height))
-        self.tableau = []
+        pygame.display.set_caption(self.caption)
+        self.surface.fill(self.bg)
+        
+    def random_bars(self):
+        """
+        Commence à 40 pixels et dessine le nombre de barres pour remplir l'écran automatiquement selon sa largeur.
+        """
+        position = 40
+        for i in range((self.width -80) // 12):
+            self.tableau.append(Bar(random.randint(0,500),position,self.surface))
+            position += 12
     
     def refresh(self):
-        self.surface.fill(0,0,0)
-        for bar in self.tableau:
-            bar.draw()
+        """
+        Remplis l'écran de noir et redessine les barres.
+        """
+        self.surface.fill(self.bg)
+        for Bar in self.tableau:
+            Bar.draw()
         pygame.display.flip()
 
-
-#To switch bars
-def bar_switch(b1,b2):
-    p1 = b1.pos
-    p2 = b2.pos
-    b1.move(p2)
-    b2.move(p1)
-
-# Tableau contenant les barres
-def rand():
-    tab = []
-    screen.fill(bg_color)
-    position = 40
-    for i in range(100):
-        b = Bar(random.randint(1,500),position)
-        tab.append(b)
-        position += 12
-    for i in range(len(tab)):
-        tab[i].draw()
-    pygame.draw.rect(screen, (255,255,255), pygame.Rect(25, 25, 25, 25))
-
-rand()
+window = Window(1280, 720, (0,0,0), "AlgoViz")
+window.random_bars()
+window.refresh()
 
 running = True
 while running:
@@ -73,8 +60,8 @@ while running:
             pygame.quit()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w:
-                rand()
+                window.random_bars()
         if event.type == pygame.MOUSEBUTTONDOWN:
             if 25 <= mouse[0] <= 50 and 25 <= mouse[1] <= 50:
-                rand()
+                print('Button 1 pressed')
                 
