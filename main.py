@@ -38,6 +38,7 @@ class Window:
         
     def random_bars(self):
         #Commence à 40 pixels et dessine le nombre de barres pour remplir l'écran automatiquement selon sa largeur.
+        self.barres = []
         position = 40
         for i in range((self.width -80) // 12):
             self.barres.append(Bar(random.randint(0,500),position,self.surface))
