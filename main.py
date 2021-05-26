@@ -1,4 +1,4 @@
-#Importatin des bibliothèques
+#Importation des bibliothèques
 from time import sleep
 import pygame
 from random import randint
@@ -80,6 +80,7 @@ def tri_selection(tab):
                 window.refresh()
     return tab
 
+"""
 def tri_insertion(tab):
     mouse = pygame.mouse.get_pos()
     pygame.display.flip()
@@ -104,5 +105,4 @@ def tri_insertion(tab):
         tab[pos].val = valeur
         
     return tab
-
-tri_insertion(window.barres)
+"""
