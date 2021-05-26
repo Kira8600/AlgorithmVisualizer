@@ -154,7 +154,7 @@ def Shell(tab):
         for i in range(e, n):
             temp = tab[i]
             j = i
-            while j >= e and a[j - e] > temp:
+            while j >= e and tab[j - e] > temp:
                 tab[j] = tab[j - e]
                 j -= e
             tab[j] = temp
