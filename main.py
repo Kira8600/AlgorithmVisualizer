@@ -28,7 +28,7 @@ class Window:
         self.barres = []
         self.width = width
         self.height = height
-        self.font = pygame.font.SysFont(None, 24)
+        self.font = pygame.font.SysFont("arial.ttf", 24)
 
         #Rectangle contenant le menu
         self.menu = pygame.Rect(0, 0, self.width, self.height // 6)
