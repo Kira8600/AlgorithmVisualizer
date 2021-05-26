@@ -5,6 +5,11 @@ from random import randint
 
 #Initialisation de PyGame
 pygame.init()
+noir = (0,0,0)
+blanc = (255, 255, 255)
+vert = (125, 255, 181)
+rouge = (255, 0, 0)
+
 
 #Classe barre
 class Bar:
@@ -23,11 +28,13 @@ class Window:
         self.barres = []
         self.width = width
         self.height = height
+        self.font = pygame.font.SysFont(None, 24)
 
         #Rectangle contenant le menu
         self.menu = pygame.Rect(0, 0, self.width, self.height // 6)
 
         #Boutons du menu :
+        pygame.Rect(25, )
         
         #Nom de la fenêtre
         self.caption = caption
@@ -77,7 +84,7 @@ def tri_selection(tab):
                         print('Button 1 pressed')
             if tab[n].val > tab[v].val:
                 tab[n].val, tab[v].val = tab[v].val, tab[n].val
-                tab[n].color = (0,255,0)
+                tab[n].color = vert
                 window.refresh()
     return tab
 
@@ -100,10 +107,25 @@ def tri_insertion(tab):
         while pos > 0 and tab[pos-1].val > valeur:
             tab[pos].val = tab[pos-1].val
             pos = pos - 1
-            tab[pos].color = (0,255,0)
+            tab[pos].color = vert
             window.refresh()
         tab[pos].val = valeur
         
     return tab
 
 tri_insertion(window.barres)
+
+running = True
+while running:
+    mouse = pygame.mouse.get_pos()
+    pygame.display.flip()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_w:
+                window.random_bars()
+                window.refresh()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if 25 <= mouse[0] <= 50 and 25 <= mouse[1] <= 50:
+                    print('Button 1 pressed')
