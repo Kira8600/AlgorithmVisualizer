@@ -1,7 +1,7 @@
 #Importatin des bibliothèques
 from time import sleep
 import pygame
-import random
+from random import randint
 
 #Initialisation de PyGame
 pygame.init()
@@ -12,7 +12,7 @@ class Bar:
         self.pos = x
         self.val = value
         self.surface = surface
-        self.color = (255,255,255)
+        self.color = (255,0,0)
 
     def draw(self):
         #Dessine une barre
@@ -42,7 +42,7 @@ class Window:
         self.barres = []
         position = 40
         for i in range((self.width -80) // 12):
-            self.barres.append(Bar(random.randint(0,500),position,self.surface))
+            self.barres.append(Bar(randint(0,500),position,self.surface))
             position += 12
     
     def refresh(self):
@@ -76,10 +76,13 @@ def tri_selection(tab):
                         print('Button 1 pressed')
             if tab[n].val > tab[v].val:
                 tab[n].val, tab[v].val = tab[v].val, tab[n].val
+                tab[n].color = (0,255,0)
                 window.refresh()
     return tab
 
 def tri_insertion(tab):
+    mouse = pygame.mouse.get_pos()
+    pygame.display.flip()
     for i in range(1, len(tab)):
         valeur = tab[i].val
         pos = i
@@ -96,7 +99,10 @@ def tri_insertion(tab):
         while pos > 0 and tab[pos-1].val > valeur:
             tab[pos].val = tab[pos-1].val
             pos = pos - 1
+            tab[pos].color = (0,255,0)
             window.refresh()
         tab[pos].val = valeur
+        
     return tab
 
+tri_insertion(window.barres)

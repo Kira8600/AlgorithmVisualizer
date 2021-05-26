@@ -36,23 +36,11 @@ def TriRapide(Tab):
 ### Tri par séléction ###
 
 def TriSelection(tab):
-    mouse = pygame.mouse.get_pos()
-    pygame.display.flip()
     for n in range (len(tab)):
         for v in range (n+1, len(tab)):
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_w:
-                        window.random_bars()
-                        window.refresh()
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if 25 <= mouse[0] <= 50 and 25 <= mouse[1] <= 50:
-                        print('Button 1 pressed')
-            if tab[n].val > tab[v].val:
-                tab[n].val, tab[v].val = tab[v].val, tab[n].val
-                window.refresh()
+            if tab[n] > tab[v]:
+                tab[n], tab[v] = tab[v], tab[n]
+                
     return tab
 
     return tab
