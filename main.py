@@ -84,6 +84,7 @@ def tri_selection(tab):
 def tri_insertion(tab):
     mouse = pygame.mouse.get_pos()
     pygame.display.flip()
+    tab[0].color = (0,255,0)
     for i in range(1, len(tab)):
         valeur = tab[i].val
         pos = i
@@ -98,12 +99,13 @@ def tri_insertion(tab):
                     if 25 <= mouse[0] <= 50 and 25 <= mouse[1] <= 50:
                         print('Button 1 pressed')
         while pos > 0 and tab[pos-1].val > valeur:
-            tab[pos].val = tab[pos-1].val
+            tab[pos].val, tab[pos-1].val = tab[pos-1].val, tab[pos].val
             pos = pos - 1
-            tab[pos].color = (0,255,0)
             window.refresh()
+        tab[i].color = (0,255,0)
         tab[pos].val = valeur
-        
+    tab[-1].color = (0,255,0)    
+    sleep(1)
     return tab
 
 tri_insertion(window.barres)
