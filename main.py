@@ -54,6 +54,7 @@ class Window:
         for Bar in self.barres:
             Bar.draw()
         pygame.display.flip()
+        sleep(0.02)
 
 window = Window(1280, 720, "AlgoViz")
 window.random_bars()
@@ -76,9 +77,14 @@ def tri_selection(tab):
                     if 25 <= mouse[0] <= 50 and 25 <= mouse[1] <= 50:
                         print('Button 1 pressed')
             if tab[n].val > tab[v].val:
+                tab[n].color = (255,200,0)
+                tab[v].color = (255,200,0)
                 tab[n].val, tab[v].val = tab[v].val, tab[n].val
-                tab[n].color = (0,255,0)
                 window.refresh()
+                tab[v].color = (255,0,0)
+        tab[n].color = (0,255,0)
+        window.refresh()
+    sleep(2)
     return tab
 
 def tri_insertion(tab):
@@ -100,12 +106,14 @@ def tri_insertion(tab):
                         print('Button 1 pressed')
         while pos > 0 and tab[pos-1].val > valeur:
             tab[pos].val, tab[pos-1].val = tab[pos-1].val, tab[pos].val
+            tab[pos].color = (0,255,0)
+            tab[pos-1].color = (255,0,0)
             pos = pos - 1
             window.refresh()
-        tab[i].color = (0,255,0)
-        tab[pos].val = valeur
-    tab[-1].color = (0,255,0)    
-    sleep(1)
+        tab[pos].color = (0,255,0)
+        window.refresh()
+        tab[pos].val = valeur      
+    sleep(2)
     return tab
 
-tri_insertion(window.barres)
+tri_selection(window.barres)
