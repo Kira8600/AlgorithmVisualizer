@@ -119,4 +119,19 @@ def tri_bulle(Tab):
         window.refresh()
     return Tab
 
-tri_bulle(window.barres)
+def verification(tab):
+    for i in range(len(tab)-1):
+        if tab[i].val > tab[i+1].val:
+            return False
+    return True
+
+def tri_bogo(tab):
+    while not verification(tab):
+        boucle()
+        for bar in tab:
+            bar.val = randint(0, 500)
+        window.refresh()
+    for bar in tab:
+        bar.color = (0,255,0)
+    window.refresh()
+    return tab
