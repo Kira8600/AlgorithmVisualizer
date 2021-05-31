@@ -12,12 +12,12 @@ def fusion(T1,T2):
     else:
         return [T2[0]] + [fusion(T2[1:], T1)]
 
-def TriFusion(Tab):
+def tri_fusion(Tab):
     if Tab == []:
         return Tab
     else:
         milieu = len(Tab)//2
-        return fusion(TriFusion(Tab[:milieu]), TriFusion(Tab[milieu:]))
+        return fusion(tri_fusion(Tab[:milieu]), tri_fusion(Tab[milieu:]))
 
 ### --- ###
 
@@ -63,7 +63,7 @@ def TriInsertion(tab):
 
 ### Tri à bulle ###
 
-def TriBulle(Tab):
+def tri_bulle(Tab):
     for i in range(len(Tab)):
         for n in range(len(Tab)-1-i):
             if Tab[n] > Tab[n+1]:
