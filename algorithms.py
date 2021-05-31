@@ -23,13 +23,13 @@ def tri_fusion(Tab):
 
 ### Tri Rapide ###
 
-def TriRapide(Tab):
+def tri_rapide(Tab):
     if Tab == []:
         return Tab
     pivot = Tab[0]
     L1 = [i for i in Tab[1:] if i <= pivot]
     L2 = [i for i in Tab[1:] if i > pivot]
-    return [TriRapide(L1)] + [pivot] + [TriRapide(L2)]
+    return [tri_rapide(L1)] + [pivot] + [tri_rapide(L2)]
 
 ### --- ###
 
