@@ -115,5 +115,3 @@ def tri_insertion(tab):
         tab[pos].val = valeur      
     sleep(2)
     return tab
-
-tri_selection(window.barres)
