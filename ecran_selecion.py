@@ -5,7 +5,7 @@ root = tk.Tk()
 #Textes
 
 titre = tk.Label(root, text = "Algorithm Visualizer", height = 3)
-sous_titre = tk.Label(root, text = "Par ARCHAMBAULT Julien, ATTLAN Jonas, DESIDE Maxime et GARRIGUES Jean-Gabriel.", height = 2)
+sous_titre = tk.Label(root, text = "ARCHAMBAULT Julien, ATTLAN Jonas, DESIDE Maxime et GARRIGUES Jean-Gabriel.", height = 2)
 
 
 #Boutons
