@@ -1,7 +1,7 @@
 #Importation des bibliothèques
 from time import sleep
 import pygame
-from random import randint
+from random import randint, random
 
 #Initialisation de PyGame
 pygame.init()
@@ -50,20 +50,19 @@ class Window:
         Remplis l'écran de noir et redessine les barres.
         """
         self.surface.fill((0,0,0))
-        pygame.draw.rect(self.surface, (230,230,230), self.menu)
         for Bar in self.barres:
             Bar.draw()
         pygame.display.flip()
-        sleep(0.02)
+        sleep(0.01)
 
 window = Window(1280, 720, "AlgoViz")
 window.random_bars()
 window.refresh()
+mouse = pygame.mouse.get_pos()
 pygame.display.flip()
 
 
 def boucle():
-    mouse = pygame.mouse.get_pos()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -128,10 +127,31 @@ def verification(tab):
 def tri_bogo(tab):
     while not verification(tab):
         boucle()
+        vals = [bar.val for bar in tab]
         for bar in tab:
-            bar.val = randint(0, 500)
+            i = randint(0, len(vals)-1)
+            bar.val = vals[i]
+            vals.pop(i)
+            bar.color = (randint(0,255), randint(0,255), randint(0,255))
         window.refresh()
     for bar in tab:
         bar.color = (0,255,0)
     window.refresh()
+    sleep(3)
     return tab
+
+
+def tri_rapide(Tab):
+    boucle()
+    if Tab == []:
+        return Tab
+    window.refresh()
+    pivot = Tab[0]
+    pivot.color = (255,200,0)
+    L1 = [i for i in Tab[1:] if i.val <= pivot.val]
+    L2 = [i for i in Tab[1:] if i.val > pivot.val]
+    pivot.color = (0,255,0)
+    window.refresh()
+    return [tri_rapide(L1)] + [pivot] + [tri_rapide(L2)], window.refresh()
+
+window.barres = tri_rapide(window.barres)
