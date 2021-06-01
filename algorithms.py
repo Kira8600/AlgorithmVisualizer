@@ -12,24 +12,24 @@ def fusion(T1,T2):
     else:
         return [T2[0]] + [fusion(T2[1:], T1)]
 
-def TriFusion(Tab):
+def tri_fusion(Tab):
     if Tab == []:
         return Tab
     else:
         milieu = len(Tab)//2
-        return fusion(TriFusion(Tab[:milieu]), TriFusion(Tab[milieu:]))
+        return fusion(tri_fusion(Tab[:milieu]), tri_fusion(Tab[milieu:]))
 
 ### --- ###
 
 ### Tri Rapide ###
 
-def TriRapide(Tab):
+def tri_rapide(Tab):
     if Tab == []:
         return Tab
     pivot = Tab[0]
     L1 = [i for i in Tab[1:] if i <= pivot]
     L2 = [i for i in Tab[1:] if i > pivot]
-    return [TriRapide(L1)] + [pivot] + [TriRapide(L2)]
+    return [tri_rapide(L1)] + [pivot] + [tri_rapide(L2)]
 
 ### --- ###
 
@@ -63,7 +63,7 @@ def TriInsertion(tab):
 
 ### Tri à bulle ###
 
-def TriBulle(Tab):
+def tri_bulle(Tab):
     for i in range(len(Tab)):
         for n in range(len(Tab)-1-i):
             if Tab[n] > Tab[n+1]:

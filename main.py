@@ -1,7 +1,7 @@
 #Importation des bibliothèques
 from time import sleep
 import pygame
-from random import randint
+from random import randint, random
 
 #Initialisation de PyGame
 pygame.init()
@@ -57,62 +57,107 @@ class Window:
         Remplis l'écran de noir et redessine les barres.
         """
         self.surface.fill((0,0,0))
-        pygame.draw.rect(self.surface, (230,230,230), self.menu)
         for Bar in self.barres:
             Bar.draw()
         pygame.display.flip()
+        sleep(0.01)
 
 window = Window(1280, 720, "AlgoViz")
 window.random_bars()
 window.refresh()
+mouse = pygame.mouse.get_pos()
+pygame.display.flip()
 
+
+def boucle():
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_w:
+                window.random_bars()
+                window.refresh()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if 25 <= mouse[0] <= 50 and 25 <= mouse[1] <= 50:
+                print('Button 1 pressed')
 
 def tri_selection(tab):
-    mouse = pygame.mouse.get_pos()
-    pygame.display.flip()
     for n in range (len(tab)):
         for v in range (n+1, len(tab)):
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_w:
-                        window.random_bars()
-                        window.refresh()
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if 25 <= mouse[0] <= 50 and 25 <= mouse[1] <= 50:
-                        print('Button 1 pressed')
+            boucle()
             if tab[n].val > tab[v].val:
+                tab[n].color = (255,200,0)
+                tab[v].color = (255,200,0)
                 tab[n].val, tab[v].val = tab[v].val, tab[n].val
+<<<<<<< HEAD
                 tab[n].color = vert
+=======
+>>>>>>> f625212ee737d9882b623441be8ec5f0bcfc2942
                 window.refresh()
+                tab[v].color = (255,0,0)
+        tab[n].color = (0,255,0)
+        window.refresh()
+    sleep(2)
     return tab
 
 def tri_insertion(tab):
-    mouse = pygame.mouse.get_pos()
-    pygame.display.flip()
+    tab[0].color = (0,255,0)
     for i in range(1, len(tab)):
         valeur = tab[i].val
         pos = i
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_w:
-                    window.random_bars()
-                    window.refresh()
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if 25 <= mouse[0] <= 50 and 25 <= mouse[1] <= 50:
-                        print('Button 1 pressed')
+        boucle()
         while pos > 0 and tab[pos-1].val > valeur:
+<<<<<<< HEAD
             tab[pos].val = tab[pos-1].val
             pos = pos - 1
             tab[pos].color = vert
+=======
+            tab[pos].val, tab[pos-1].val = tab[pos-1].val, tab[pos].val
+            tab[pos].color = (0,255,0)
+            tab[pos-1].color = (255,0,0)
+            pos = pos - 1
+>>>>>>> f625212ee737d9882b623441be8ec5f0bcfc2942
             window.refresh()
-        tab[pos].val = valeur
-        
+        tab[pos].color = (0,255,0)
+        window.refresh()
+        tab[pos].val = valeur      
+    sleep(2)
     return tab
 
+def tri_bulle(Tab):
+    for i in range(len(Tab)):
+        for n in range(len(Tab)-1-i):
+            boucle()
+            if Tab[n].val > Tab[n+1].val:
+                Tab[n].val, Tab[n+1].val = Tab[n+1].val, Tab[n].val
+                window.refresh()
+        Tab[len(Tab)-i-1].color = (0,255,0)
+        window.refresh()
+    return Tab
+
+def verification(tab):
+    for i in range(len(tab)-1):
+        if tab[i].val > tab[i+1].val:
+            return False
+    return True
+
+def tri_bogo(tab):
+    while not verification(tab):
+        boucle()
+        vals = [bar.val for bar in tab]
+        for bar in tab:
+            i = randint(0, len(vals)-1)
+            bar.val = vals[i]
+            vals.pop(i)
+            bar.color = (randint(0,255), randint(0,255), randint(0,255))
+        window.refresh()
+    for bar in tab:
+        bar.color = (0,255,0)
+    window.refresh()
+    sleep(3)
+    return tab
+
+<<<<<<< HEAD
 tri_insertion(window.barres)
 
 running = True
@@ -129,3 +174,20 @@ while running:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if 25 <= mouse[0] <= 50 and 25 <= mouse[1] <= 50:
                     print('Button 1 pressed')
+=======
+
+def tri_rapide(Tab):
+    boucle()
+    if Tab == []:
+        return Tab
+    window.refresh()
+    pivot = Tab[0]
+    pivot.color = (255,200,0)
+    L1 = [i for i in Tab[1:] if i.val <= pivot.val]
+    L2 = [i for i in Tab[1:] if i.val > pivot.val]
+    pivot.color = (0,255,0)
+    window.refresh()
+    return [tri_rapide(L1)] + [pivot] + [tri_rapide(L2)], window.refresh()
+
+window.barres = tri_rapide(window.barres)
+>>>>>>> f625212ee737d9882b623441be8ec5f0bcfc2942
