@@ -33,9 +33,6 @@ class Window:
         #Rectangle contenant le menu
         self.menu = pygame.Rect(0, 0, self.width, self.height // 6)
 
-        #Boutons du menu :
-        pygame.Rect(25, )
-        
         #Nom de la fenêtre
         self.caption = caption
 
@@ -73,13 +70,6 @@ def boucle():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_w:
-                window.random_bars()
-                window.refresh()
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if 25 <= mouse[0] <= 50 and 25 <= mouse[1] <= 50:
-                print('Button 1 pressed')
 
 def tri_selection(tab):
     for n in range (len(tab)):
@@ -89,10 +79,9 @@ def tri_selection(tab):
                 tab[n].color = (255,200,0)
                 tab[v].color = (255,200,0)
                 tab[n].val, tab[v].val = tab[v].val, tab[n].val
-<<<<<<< HEAD
+
                 tab[n].color = vert
-=======
->>>>>>> f625212ee737d9882b623441be8ec5f0bcfc2942
+
                 window.refresh()
                 tab[v].color = (255,0,0)
         tab[n].color = (0,255,0)
@@ -107,16 +96,16 @@ def tri_insertion(tab):
         pos = i
         boucle()
         while pos > 0 and tab[pos-1].val > valeur:
-<<<<<<< HEAD
+
             tab[pos].val = tab[pos-1].val
             pos = pos - 1
             tab[pos].color = vert
-=======
+
             tab[pos].val, tab[pos-1].val = tab[pos-1].val, tab[pos].val
             tab[pos].color = (0,255,0)
             tab[pos-1].color = (255,0,0)
             pos = pos - 1
->>>>>>> f625212ee737d9882b623441be8ec5f0bcfc2942
+
             window.refresh()
         tab[pos].color = (0,255,0)
         window.refresh()
@@ -157,24 +146,16 @@ def tri_bogo(tab):
     sleep(3)
     return tab
 
-<<<<<<< HEAD
 tri_insertion(window.barres)
 
 running = True
 while running:
-    mouse = pygame.mouse.get_pos()
+    #mouse = pygame.mouse.get_pos()
     pygame.display.flip()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_w:
-                window.random_bars()
-                window.refresh()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if 25 <= mouse[0] <= 50 and 25 <= mouse[1] <= 50:
-                    print('Button 1 pressed')
-=======
+
 
 def tri_rapide(Tab):
     boucle()
@@ -189,5 +170,4 @@ def tri_rapide(Tab):
     window.refresh()
     return [tri_rapide(L1)] + [pivot] + [tri_rapide(L2)], window.refresh()
 
-window.barres = tri_rapide(window.barres)
->>>>>>> f625212ee737d9882b623441be8ec5f0bcfc2942
+#window.barres = tri_rapide(window.barres)
