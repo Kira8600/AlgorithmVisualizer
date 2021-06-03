@@ -81,6 +81,9 @@ def boucle():
         if event.type == pygame.QUIT:
             pygame.quit()
 
+
+# Séléction #
+
 def tri_selection(tab):
     for n in range (len(tab)):
         for v in range (n+1, len(tab)):
@@ -98,6 +101,11 @@ def tri_selection(tab):
         window.refresh()
     sleep(2)
     return tab
+
+# --- #
+
+
+# Insertion #
 
 def tri_insertion(tab):
     tab[0].color = (0,255,0)
@@ -117,6 +125,11 @@ def tri_insertion(tab):
     sleep(2)
     return tab
 
+# --- #
+
+
+# Bulle #
+
 def tri_bulle(Tab):
     for i in range(len(Tab)):
         for n in range(len(Tab)-1-i):
@@ -127,6 +140,11 @@ def tri_bulle(Tab):
         Tab[len(Tab)-i-1].color = (0,255,0)
         window.refresh()
     return Tab
+
+# --- #
+
+
+# Bogo / Stupide / Mélange / pourquoi / mais enfin ! #
 
 def verification(tab):
     for i in range(len(tab)-1):
@@ -150,6 +168,10 @@ def tri_bogo(tab):
     sleep(3)
     return tab
 
+# --- #
+
+
+# Tri Rapide #
 
 def tri_rapide(Tab):
     boucle()
@@ -164,4 +186,27 @@ def tri_rapide(Tab):
     window.refresh()
     return [tri_rapide(L1)] + [pivot] + [tri_rapide(L2)], window.refresh()
 
-tri_insertion(window.barres)
+# --- #
+
+# Fusion #
+
+def fusion(T1,T2):
+    if T1 == []:
+        return T2
+    if T2 == []:
+        return T1
+    if T1[0] < T2[0]:
+        return [T1[0]] + [fusion(T1[1:], T2)]
+    else:
+        return [T2[0]] + [fusion(T2[1:], T1)]
+
+def tri_fusion(Tab):
+    if Tab == []:
+        return Tab
+    else:
+        milieu = len(Tab)//2
+        return fusion(tri_fusion(Tab[:milieu]), tri_fusion(Tab[milieu:]))
+
+# --- #
+
+tri_rapide(window.barres)
