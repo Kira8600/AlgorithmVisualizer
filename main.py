@@ -67,7 +67,7 @@ class Window:
         for Bar in self.barres:
             Bar.draw()
         pygame.display.flip()
-        sleep(0.01)
+        sleep(0.1)
 
 window = Window(1280, 720, "AlgoViz")
 window.not_random_bars()
@@ -195,9 +195,12 @@ def fusion(T1,T2):
         return T2
     if T2 == []:
         return T1
-    if T1[0] < T2[0]:
+    if T1[0].val < T2[0].val:
+        T1[0].color(0,255,0)
+        window.refresh()
         return [T1[0]] + [fusion(T1[1:], T2)]
     else:
+        window.refresh()
         return [T2[0]] + [fusion(T2[1:], T1)]
 
 def tri_fusion(Tab):
@@ -205,8 +208,9 @@ def tri_fusion(Tab):
         return Tab
     else:
         milieu = len(Tab)//2
+        window.refresh()
         return fusion(tri_fusion(Tab[:milieu]), tri_fusion(Tab[milieu:]))
 
 # --- #
 
-tri_rapide(window.barres)
+tri_fusion(window.barres)
