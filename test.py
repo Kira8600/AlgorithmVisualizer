@@ -17,11 +17,11 @@ class Bar:
         self.pos = x
         self.val = value
         self.surface = surface
-        self.color = (255,255,255)
+        self.color = blanc
 
     def draw(self):
         #Dessine une barre
-        pygame.draw.line(self.surface, self.color, (self.pos,700), (self.pos,700-self.val), 10)
+        pygame.draw.line(self.surface, self.color, (self.pos,700), (self.pos,700-self.val), 5)
 
 class Window:
     def __init__(self, width, height, caption):
@@ -41,13 +41,13 @@ class Window:
         pygame.display.set_caption(self.caption)
         self.surface.fill((0,42,0))
         
-    def random_bars(self):
+    def generer(self):
         #Commence à 40 pixels et dessine le nombre de barres pour remplir l'écran automatiquement selon sa largeur.
         self.barres = []
         position = 40
-        for i in range((self.width -80) // 12):
-            self.barres.append(Bar(randint(0,500),position,self.surface))
-            position += 12
+        for i in range((self.width -80) // 7):
+            self.barres.append(Bar(i*2.5,position,self.surface))
+            position += 7
     
     def refresh(self):
         """
@@ -60,7 +60,7 @@ class Window:
         sleep(0.01)
 
 window = Window(1280, 720, "AlgoViz")
-window.random_bars()
+window.generer()
 window.refresh()
 mouse = pygame.mouse.get_pos()
 pygame.display.flip()
@@ -95,11 +95,6 @@ def tri_insertion(tab):
         pos = i
         boucle()
         while pos > 0 and tab[pos-1].val > valeur:
-
-            tab[pos].val = tab[pos-1].val
-            pos = pos - 1
-            tab[pos].color = vert
-
             tab[pos].val, tab[pos-1].val = tab[pos-1].val, tab[pos].val
             tab[pos].color = (0,255,0)
             tab[pos-1].color = (255,0,0)
@@ -158,6 +153,23 @@ def tri_rapide(Tab):
     window.refresh()
     return [tri_rapide(L1)] + [pivot] + [tri_rapide(L2)], window.refresh()
 
+def fusion(T1,T2):
+    if T1 == []:
+        return T2
+    if T2 == []:
+        return T1
+    if T1[0].val < T2[0].val:
+        return [T1[0]] + [fusion(T1[1:], T2)]
+    else:
+        return [T2[0]] + [fusion(T2[1:], T1)]
+
+def tri_fusion(Tab):
+    if Tab == []:
+        return Tab
+    else:
+        milieu = len(Tab)//2
+        return fusion(tri_fusion(Tab[:milieu]), tri_fusion(Tab[milieu:]))
+
 #Initialisation de tKinter
 root = tk.Tk()
 
@@ -165,8 +177,8 @@ titre = tk.Label(root, text = "Algorithm Visualizer", height = 3, width = 20,fon
 sous_titre = tk.Label(root, text = "Programmé par :", font = ('Arial', 8))
 noms = tk.Label(root, text = "ARCHAMBAULT Julien\n ATTLAN Jonas\n DESIDE Maxime\n GARRIGUES Jean-Gabriel", height = 5)
 
-titre.pack()
 sous_titre.pack()
+titre.pack()
 noms.pack()
 
 #Boutons
@@ -188,6 +200,8 @@ button5.pack()
 button6=tk.Button(root, text="Tri rapide", command = lambda : tri_rapide(window.barres))
 button6.pack()
 
+button7=tk.Button(root, text="Tri rapide", command = lambda : tri_fusion(window.barres))
+button7.pack()
 
 root.mainloop()
 
