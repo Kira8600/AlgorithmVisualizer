@@ -52,12 +52,12 @@ class Window:
     def not_random_bars(self):
         self.barres = []
         position = 40
-        val = [v for v in range(5,501),5]
+        val = [v for v in range(5,501,5)]
         for i in range((self.width -80) // 12):
-            self.barres.append(Bar(1,position,self.surface))
+            r = randint(0, len(val)-1)
+            self.barres.append(Bar(val[r],position,self.surface))
+            val.pop(r)
             position += 12
-        for k in range(len(self.barres)):
-            self.barres
     
     def refresh(self):
         """
@@ -67,7 +67,7 @@ class Window:
         for Bar in self.barres:
             Bar.draw()
         pygame.display.flip()
-        sleep(0.04)
+        sleep(0.01)
 
 window = Window(1280, 720, "AlgoViz")
 window.not_random_bars()
