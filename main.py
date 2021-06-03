@@ -1,7 +1,7 @@
 #Importation des bibliothèques
 from time import sleep
 import pygame
-from random import randint, random
+from random import randint, random, shuffle
 
 #Initialisation de PyGame
 pygame.init()
@@ -49,6 +49,16 @@ class Window:
             self.barres.append(Bar(randint(0,500),position,self.surface))
             position += 12
     
+    def not_random_bars(self):
+        self.barres = []
+        position = 40
+        val = [v for v in range(5,501,5)]
+        for i in range((self.width -80) // 12):
+            r = randint(0, len(val)-1)
+            self.barres.append(Bar(val[r],position,self.surface))
+            val.pop(r)
+            position += 12
+    
     def refresh(self):
         """
         Remplis l'écran de noir et redessine les barres.
@@ -60,7 +70,7 @@ class Window:
         sleep(0.01)
 
 window = Window(1280, 720, "AlgoViz")
-window.random_bars()
+window.not_random_bars()
 window.refresh()
 mouse = pygame.mouse.get_pos()
 pygame.display.flip()
@@ -96,16 +106,10 @@ def tri_insertion(tab):
         pos = i
         boucle()
         while pos > 0 and tab[pos-1].val > valeur:
-
-            tab[pos].val = tab[pos-1].val
-            pos = pos - 1
-            tab[pos].color = vert
-
             tab[pos].val, tab[pos-1].val = tab[pos-1].val, tab[pos].val
             tab[pos].color = (0,255,0)
             tab[pos-1].color = (255,0,0)
             pos = pos - 1
-
             window.refresh()
         tab[pos].color = (0,255,0)
         window.refresh()
@@ -146,16 +150,6 @@ def tri_bogo(tab):
     sleep(3)
     return tab
 
-tri_insertion(window.barres)
-
-running = True
-while running:
-    #mouse = pygame.mouse.get_pos()
-    pygame.display.flip()
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-
 
 def tri_rapide(Tab):
     boucle()
@@ -170,4 +164,4 @@ def tri_rapide(Tab):
     window.refresh()
     return [tri_rapide(L1)] + [pivot] + [tri_rapide(L2)], window.refresh()
 
-#window.barres = tri_rapide(window.barres)
+tri_insertion(window.barres)
