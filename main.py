@@ -213,4 +213,4 @@ def tri_fusion(Tab):
 
 # --- #
 
-tri_fusion(window.barres)
+tri_insertion(window.barres)

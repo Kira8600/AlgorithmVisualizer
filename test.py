@@ -46,7 +46,7 @@ class Window:
         self.barres = []
         position = 40
         for i in range((self.width -80) // 7):
-            self.barres.append(Bar(i*2.5,position,self.surface))
+            self.barres.append(Bar(randint(1,500),position,self.surface))
             position += 7
     
     def refresh(self):
